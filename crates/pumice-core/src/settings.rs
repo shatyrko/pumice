@@ -15,11 +15,19 @@ pub struct Settings {
     pub protected: Vec<String>,
     /// Only look at artifacts whose project has been idle this many days.
     pub purge_idle_days: u64,
+    /// Dashboard warning limits (percent / degrees Celsius) and the temperature unit (c or f).
+    pub cpu_warn: f32,
+    pub cpu_crit: f32,
+    pub temp_warn: f32,
+    pub temp_crit: f32,
+    pub ram_warn: f32,
+    pub ram_crit: f32,
+    pub temp_unit: String,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        Settings { purge_roots: Vec::new(), use_trash: true, min_file_bytes: 1 << 20, protected: Vec::new(), purge_idle_days: 30 }
+        Settings { purge_roots: Vec::new(), use_trash: true, min_file_bytes: 1 << 20, protected: Vec::new(), purge_idle_days: 30, cpu_warn: 70.0, cpu_crit: 90.0, temp_warn: 80.0, temp_crit: 95.0, ram_warn: 75.0, ram_crit: 90.0, temp_unit: "c".into() }
     }
 }
 
