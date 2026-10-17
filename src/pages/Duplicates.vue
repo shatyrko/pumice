@@ -23,6 +23,7 @@ let off = null;
 onMounted(() => {
   off = on('dup-progress', (p) => (progress.value = p));
   roots.value = ['~'];
+  if (import.meta.env.DEV && new URLSearchParams(location.search).get('scan')) find();
 });
 onUnmounted(() => off && off());
 

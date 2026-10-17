@@ -44,7 +44,11 @@ const apps = [
   ['flatpak:org.mozilla.firefox', 'Firefox', 'flatpak', 'org.mozilla.firefox', '141.0', 0.52 * GB],
   ['appimage:/home/demo/Applications/tool.AppImage', 'tool', 'appimage', '/home/demo/Applications/tool.AppImage', '', 0.2 * GB],
   ['pacman:btop', 'btop++', 'pacman', 'btop', '1.4.0', 0.003 * GB],
-].map(([id, name, source, pkg, version, size]) => ({ id, name, source, package: pkg, version, size, icon: null, comment: 'Sample application' }));
+].map(([id, name, source, pkg, version, size], i) => ({
+  id, name, source, package: pkg, version, size,
+  icon: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="11" fill="hsl(${[210, 20, 25, 150, 280][i % 5]} 55% 46%)"/><text x="24" y="32" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700" fill="#fff">${name[0]}</text></svg>`),
+  comment: ['Fast and private web browser', 'Image editor', 'Web browser from Mozilla', 'A downloaded tool', 'Resource monitor'][i % 5],
+}));
 
 const dupGroups = [
   { hash: 'h1', size: 1.1 * GB, files: [{ path: '/home/demo/Downloads/archlinux.iso', mtime: now - 60 * day }, { path: '/home/demo/Old/archlinux (1).iso', mtime: now - 20 * day }] },
@@ -95,7 +99,7 @@ const handlers = {
   places: () => ({ home: '/home/demo', purge_roots: ['/home/demo/Projects'] }),
   settings_get: () => settings,
   settings_set: ({ value }) => Object.assign(settings, value),
-  helper_status: () => ({ installed: false, path: '/usr/lib/pumice/pumice-helper' }),
+  helper_status: () => ({ installed: true, path: '/usr/lib/pumice/pumice-helper' }),
   system_snapshot: () => snapshot(),
   scan_start: ({ purpose }) => { T = demoTree(); return { purpose, root: '/home/demo', total_size: T.size, total_files: 381937, millis: 311, errors: 2, cancelled: false }; },
   scan_cancel: () => null,

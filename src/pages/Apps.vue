@@ -30,7 +30,10 @@ async function load() {
     loading.value = false;
   }
 }
-onMounted(load);
+onMounted(async () => {
+  await load();
+  if (import.meta.env.DEV && new URLSearchParams(location.search).get('select')) sel.value = shown.value[0] || null;
+});
 
 const sources = computed(() => ['all', ...new Set(apps.value.map((a) => a.source))]);
 const shown = computed(() => {

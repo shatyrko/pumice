@@ -30,6 +30,11 @@ onMounted(async () => {
   } catch {
     mounts.value = [];
   }
+  const q = import.meta.env.DEV ? new URLSearchParams(location.search) : null;
+  if (q?.get('scan')) {
+    view.value = q.get('view') || 'list';
+    await scan();
+  }
 });
 onUnmounted(() => off && off());
 

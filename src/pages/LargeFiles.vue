@@ -20,7 +20,10 @@ const picked = reactive(new Set());
 const busy = ref(false);
 let off = null;
 
-onMounted(() => (off = on('scan-progress', (p) => (progress.value = p))));
+onMounted(() => {
+  off = on('scan-progress', (p) => (progress.value = p));
+  if (import.meta.env.DEV && new URLSearchParams(location.search).get('scan')) scanHome();
+});
 onUnmounted(() => off && off());
 
 async function scanHome() {

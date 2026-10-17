@@ -12,6 +12,23 @@ It is inspired by [Mole](https://github.com/tw93/mole) (macOS cleaner, GPL-3.0) 
 [MangoDisk](https://github.com/harry0703/MangoDisk) (disk cleaner and analyzer, GPL-3.0). It is a new
 code base, not a fork; the dashboard follows the System Stats widget of the author's desktop bar.
 
+<p align="center"><img src="docs/screenshots/dashboard.png" alt="Pumice dashboard" width="860"></p>
+
+<sub>The screenshots use sample data (a made-up home folder), not a real machine.</sub>
+
+## Screenshots
+
+| | |
+| --- | --- |
+| ![Clean](docs/screenshots/clean.png) **Clean**: rules grouped by category, risk levels, nothing removed until you confirm. | ![Treemap](docs/screenshots/analyze-treemap.png) **Analyze**: treemap, with list and sunburst views. |
+| ![Sunburst](docs/screenshots/analyze-sunburst.png) **Sunburst** of a folder, adjustable depth. | ![Duplicates](docs/screenshots/duplicates.png) **Duplicates**: exact copies, one is always kept. |
+| ![Large files](docs/screenshots/large-files.png) **Large files** by size, age and kind. | ![Projects](docs/screenshots/projects.png) **Projects**: build folders you can make again. |
+| ![Apps](docs/screenshots/apps.png) **Apps** from every source, with their leftovers. | ![Maintenance](docs/screenshots/maintenance.png) **Maintenance**: checks and safe repairs through polkit. |
+
+Light theme too, it follows the system:
+
+<p align="center"><img src="docs/screenshots/dashboard-light.png" alt="Pumice dashboard, light theme" width="640"></p>
+
 ## What it does
 
 | Page | What you get |
@@ -85,7 +102,9 @@ scripts/install-helper.sh
 ```
 
 `npm run dev` alone opens the interface in a browser with sample data (no Rust side), which is
-handy for working on the layout.
+handy for working on the layout. With `?page=clean&theme=dark` (and `scan=1`, `view=treemap`,
+`select=1` on some pages) in the address it opens a page directly: that is how the screenshots in
+`docs/screenshots` were taken, with headless Chrome.
 
 ## Layout
 
