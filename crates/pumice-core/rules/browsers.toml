@@ -1,0 +1,59 @@
+[[rule]]
+id = "firefox-cache"
+name = "Firefox cache"
+category = "browsers"
+description = "Pages and pictures Firefox saved for later."
+risk = "low"
+paths = ["~/.cache/mozilla/firefox/*/cache2/*", "~/.cache/mozilla/firefox/*/startupCache/*"]
+blocked_by = ["firefox", "firefox-bin"]
+note = "Close Firefox first."
+
+[[rule]]
+id = "chrome-cache"
+name = "Google Chrome cache"
+category = "browsers"
+description = "Pages, scripts and shaders Chrome saved for later."
+risk = "low"
+paths = ["~/.cache/google-chrome/*/Cache/*", "~/.cache/google-chrome/*/Code Cache/*", "~/.cache/google-chrome/*/GPUCache/*"]
+blocked_by = ["chrome"]
+note = "Close Chrome first."
+
+[[rule]]
+id = "chromium-cache"
+name = "Chromium cache"
+category = "browsers"
+description = "Pages, scripts and shaders Chromium saved for later."
+risk = "low"
+paths = ["~/.cache/chromium/*/Cache/*", "~/.cache/chromium/*/Code Cache/*", "~/.cache/chromium/*/GPUCache/*"]
+blocked_by = ["chromium"]
+note = "Close Chromium first."
+
+[[rule]]
+id = "brave-cache"
+name = "Brave cache"
+category = "browsers"
+description = "Pages, scripts and shaders Brave saved for later."
+risk = "low"
+paths = ["~/.cache/BraveSoftware/Brave-Browser/*/Cache/*", "~/.cache/BraveSoftware/Brave-Browser/*/Code Cache/*", "~/.cache/BraveSoftware/Brave-Browser/*/GPUCache/*"]
+blocked_by = ["brave"]
+note = "Close Brave first."
+
+[[rule]]
+id = "edge-cache"
+name = "Microsoft Edge cache"
+category = "browsers"
+description = "Pages, scripts and shaders Edge saved for later."
+risk = "low"
+paths = ["~/.cache/microsoft-edge/*/Cache/*", "~/.cache/microsoft-edge/*/Code Cache/*", "~/.cache/microsoft-edge/*/GPUCache/*"]
+blocked_by = ["msedge"]
+note = "Close Edge first."
+
+[[rule]]
+id = "vivaldi-cache"
+name = "Vivaldi cache"
+category = "browsers"
+description = "Pages, scripts and shaders Vivaldi saved for later."
+risk = "low"
+paths = ["~/.cache/vivaldi/*/Cache/*", "~/.cache/vivaldi/*/Code Cache/*", "~/.cache/vivaldi/*/GPUCache/*"]
+blocked_by = ["vivaldi-bin"]
+note = "Close Vivaldi first."

@@ -1,0 +1,62 @@
+[[rule]]
+id = "firefox-privacy"
+name = "Firefox cookies and form history"
+category = "privacy"
+description = "Cookies, saved form entries and the last session. Bookmarks, passwords and browsing history are not touched."
+risk = "medium"
+paths = [
+  "~/.mozilla/firefox/*/cookies.sqlite*", "~/.mozilla/firefox/*/formhistory.sqlite*",
+  "~/.mozilla/firefox/*/sessionstore-backups/*", "~/.mozilla/firefox/*/sessionstore.jsonlz4",
+]
+blocked_by = ["firefox", "firefox-bin"]
+note = "You will be signed out of websites. Close Firefox first."
+
+[[rule]]
+id = "chrome-privacy"
+name = "Chrome history and cookies"
+category = "privacy"
+description = "Browsing history, cookies and top sites. Passwords, bookmarks and autofill are not touched."
+risk = "medium"
+paths = [
+  "~/.config/google-chrome/*/History*", "~/.config/google-chrome/*/Cookies*",
+  "~/.config/google-chrome/*/Top Sites*", "~/.config/google-chrome/*/Visited Links",
+  "~/.config/google-chrome/*/Shortcuts*", "~/.config/google-chrome/*/Network Action Predictor*",
+]
+blocked_by = ["chrome"]
+note = "You will be signed out of websites. Close Chrome first."
+
+[[rule]]
+id = "chromium-privacy"
+name = "Chromium history and cookies"
+category = "privacy"
+description = "Browsing history, cookies and top sites. Passwords, bookmarks and autofill are not touched."
+risk = "medium"
+paths = [
+  "~/.config/chromium/*/History*", "~/.config/chromium/*/Cookies*",
+  "~/.config/chromium/*/Top Sites*", "~/.config/chromium/*/Visited Links",
+  "~/.config/chromium/*/Shortcuts*", "~/.config/chromium/*/Network Action Predictor*",
+]
+blocked_by = ["chromium"]
+note = "You will be signed out of websites. Close Chromium first."
+
+[[rule]]
+id = "brave-privacy"
+name = "Brave history and cookies"
+category = "privacy"
+description = "Browsing history, cookies and top sites. Passwords, bookmarks and autofill are not touched."
+risk = "medium"
+paths = [
+  "~/.config/BraveSoftware/Brave-Browser/*/History*", "~/.config/BraveSoftware/Brave-Browser/*/Cookies*",
+  "~/.config/BraveSoftware/Brave-Browser/*/Top Sites*", "~/.config/BraveSoftware/Brave-Browser/*/Visited Links",
+  "~/.config/BraveSoftware/Brave-Browser/*/Shortcuts*",
+]
+blocked_by = ["brave"]
+note = "You will be signed out of websites. Close Brave first."
+
+[[rule]]
+id = "recent-files"
+name = "Recently used files"
+category = "privacy"
+description = "The list of recent documents kept by GTK and KDE applications."
+risk = "low"
+paths = ["~/.local/share/recently-used.xbel", "~/.local/share/RecentDocuments/*"]

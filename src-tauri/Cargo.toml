@@ -1,0 +1,21 @@
+[package]
+name = "pumice"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "A disk cleaner and system care app for Linux."
+
+[lib]
+name = "pumice_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+pumice-core = { path = "../crates/pumice-core" }
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"

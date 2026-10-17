@@ -1,0 +1,79 @@
+[[rule]]
+id = "user-cache"
+name = "Application caches"
+category = "caches"
+description = "Files programs keep in ~/.cache to start faster. They are rebuilt when needed."
+risk = "low"
+paths = ["~/.cache/*"]
+exclude = [
+  "~/.cache/pumice", "~/.cache/paru", "~/.cache/yay", "~/.cache/trizen", "~/.cache/pikaur",
+  "~/.cache/thumbnails",
+  "~/.cache/pip", "~/.cache/uv", "~/.cache/yarn", "~/.cache/go-build", "~/.cache/pre-commit",
+  "~/.cache/node-gyp", "~/.cache/electron", "~/.cache/ms-playwright", "~/.cache/Cypress",
+  "~/.cache/puppeteer", "~/.cache/pypoetry", "~/.cache/sccache", "~/.cache/ccache", "~/.cache/JetBrains",
+  "~/.cache/huggingface", "~/.cache/torch", "~/.cache/whisper", "~/.cache/lm-studio", "~/.cache/gpt4all",
+  "~/.cache/mozilla", "~/.cache/google-chrome", "~/.cache/chromium", "~/.cache/BraveSoftware",
+  "~/.cache/microsoft-edge", "~/.cache/vivaldi",
+  "~/.cache/mesa_shader_cache", "~/.cache/nvidia", "~/.cache/radv_builtin_shaders64", "~/.cache/AMD",
+]
+min_age_days = 1
+note = "Anything used in the last day is left alone."
+
+[[rule]]
+id = "thumbnails"
+name = "Picture thumbnails"
+category = "caches"
+description = "Small previews made by the file manager. They are made again when a folder is opened."
+risk = "low"
+paths = ["~/.cache/thumbnails/*", "~/.thumbnails/*"]
+
+[[rule]]
+id = "gpu-shaders"
+name = "GPU shader caches"
+category = "caches"
+description = "Compiled shaders of games and the desktop. Games may stutter once while they compile again."
+risk = "medium"
+paths = [
+  "~/.cache/mesa_shader_cache/*", "~/.cache/nvidia/*", "~/.nv/*",
+  "~/.cache/radv_builtin_shaders64/*", "~/.cache/AMD/*",
+  "~/.local/share/Steam/steamapps/shadercache/*",
+]
+
+[[rule]]
+id = "flatpak-caches"
+name = "Flatpak app caches"
+category = "caches"
+description = "The cache folder of each Flatpak app (~/.var/app/<app>/cache)."
+risk = "low"
+paths = ["~/.var/app/*/cache/*"]
+min_age_days = 1
+
+[[rule]]
+id = "electron-caches"
+name = "Electron app caches"
+category = "caches"
+description = "Chromium-style caches inside Electron apps such as VS Code, Slack and Discord."
+risk = "low"
+paths = [
+  "~/.config/*/Cache/*", "~/.config/*/Code Cache/*", "~/.config/*/GPUCache/*",
+  "~/.config/*/DawnCache/*", "~/.config/*/GrShaderCache/*", "~/.config/*/ShaderCache/*",
+  "~/.config/*/Service Worker/CacheStorage/*", "~/.config/Code/CachedExtensionVSIXs/*",
+]
+
+[[rule]]
+id = "trash"
+name = "Trash"
+category = "caches"
+description = "Files you moved to the Trash. Emptying it frees the space for good."
+risk = "medium"
+paths = ["~/.local/share/Trash/files/*", "~/.local/share/Trash/info/*"]
+note = "This cannot be undone."
+
+[[rule]]
+id = "aur-helper"
+name = "AUR build caches"
+category = "packages"
+description = "Sources and build folders of AUR packages kept by paru, yay, trizen and pikaur."
+risk = "low"
+paths = ["~/.cache/paru/*", "~/.cache/yay/*", "~/.cache/trizen/*", "~/.cache/pikaur/*"]
+note = "The next AUR install or upgrade downloads and builds again."

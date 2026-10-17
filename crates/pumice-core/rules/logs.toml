@@ -1,0 +1,23 @@
+[[rule]]
+id = "session-logs"
+name = "Desktop session logs"
+category = "logs"
+description = "~/.xsession-errors and old X server logs."
+risk = "low"
+paths = ["~/.xsession-errors*", "~/.local/share/xorg/*.old"]
+
+[[rule]]
+id = "crash-reports"
+name = "Crash reports"
+category = "logs"
+description = "Crash dumps left by Electron and Chromium-based apps."
+risk = "low"
+paths = ["~/.config/*/Crash Reports/*", "~/.config/*/Crashpad/completed/*", "~/.config/*/Crashpad/pending/*"]
+
+[[rule]]
+id = "app-logs"
+name = "Editor and app logs"
+category = "logs"
+description = "Log folders of VS Code and similar editors."
+risk = "low"
+paths = ["~/.config/Code/logs/*", "~/.config/Code - OSS/logs/*", "~/.config/VSCodium/logs/*", "~/.config/Cursor/logs/*"]

@@ -1,0 +1,106 @@
+[[rule]]
+id = "cargo-registry"
+name = "Cargo downloads"
+category = "developer"
+description = "Downloaded crates and unpacked sources in ~/.cargo. Cargo fetches them again on the next build."
+risk = "low"
+paths = ["~/.cargo/registry/cache/*", "~/.cargo/registry/src/*", "~/.cargo/git/checkouts/*"]
+note = "Offline builds need the download again."
+
+[[rule]]
+id = "npm-cache"
+name = "npm cache"
+category = "developer"
+description = "The npm download cache and its logs."
+risk = "low"
+paths = ["~/.npm/_cacache", "~/.npm/_logs/*", "~/.npm/_npx/*"]
+
+[[rule]]
+id = "yarn-cache"
+name = "Yarn cache"
+category = "developer"
+description = "The Yarn download cache."
+risk = "low"
+paths = ["~/.cache/yarn/*", "~/.yarn/berry/cache/*"]
+
+[[rule]]
+id = "pnpm-store"
+name = "pnpm store"
+category = "developer"
+description = "The shared pnpm package store. Projects keep working, packages are fetched again on install."
+risk = "medium"
+paths = ["~/.local/share/pnpm/store/*", "~/.cache/pnpm/*"]
+
+[[rule]]
+id = "bun-cache"
+name = "Bun cache"
+category = "developer"
+description = "The Bun package cache."
+risk = "low"
+paths = ["~/.bun/install/cache/*"]
+
+[[rule]]
+id = "pip-cache"
+name = "Python package caches"
+category = "developer"
+description = "pip, uv and Poetry download caches."
+risk = "low"
+paths = ["~/.cache/pip/*", "~/.cache/uv/*", "~/.cache/pypoetry/cache/*", "~/.cache/pypoetry/artifacts/*"]
+
+[[rule]]
+id = "conda-pkgs"
+name = "Conda package caches"
+category = "developer"
+description = "Downloaded conda packages (pkgs folders)."
+risk = "medium"
+paths = ["~/miniconda3/pkgs/*", "~/anaconda3/pkgs/*", "~/miniforge3/pkgs/*", "~/.conda/pkgs/*"]
+
+[[rule]]
+id = "go-cache"
+name = "Go build and module caches"
+category = "developer"
+description = "Compiled packages and downloaded modules of Go."
+risk = "low"
+paths = ["~/.cache/go-build/*", "~/go/pkg/mod/cache/*"]
+
+[[rule]]
+id = "gradle-maven"
+name = "Gradle and Maven caches"
+category = "developer"
+description = "Downloaded dependencies of Gradle and Maven builds."
+risk = "medium"
+paths = ["~/.gradle/caches/*", "~/.gradle/daemon/*", "~/.m2/repository/*"]
+note = "The next build downloads them again."
+
+[[rule]]
+id = "compiler-caches"
+name = "Compiler caches"
+category = "developer"
+description = "ccache, sccache and node-gyp headers."
+risk = "low"
+paths = ["~/.cache/ccache/*", "~/.ccache/*", "~/.cache/sccache/*", "~/.cache/node-gyp/*", "~/.node-gyp/*"]
+
+[[rule]]
+id = "tool-downloads"
+name = "Tool downloads"
+category = "developer"
+description = "Browsers and binaries that test tools fetched (Playwright, Cypress, Puppeteer, Electron)."
+risk = "medium"
+paths = ["~/.cache/ms-playwright/*", "~/.cache/Cypress/*", "~/.cache/puppeteer/*", "~/.cache/electron/*"]
+note = "They are downloaded again the next time the tool runs."
+
+[[rule]]
+id = "pre-commit"
+name = "pre-commit environments"
+category = "developer"
+description = "Hook environments built by pre-commit."
+risk = "low"
+paths = ["~/.cache/pre-commit/*"]
+
+[[rule]]
+id = "ide-caches"
+name = "JetBrains IDE caches"
+category = "developer"
+description = "Indexes and caches of IntelliJ-based IDEs. They are rebuilt on the next start (this takes a while)."
+risk = "medium"
+paths = ["~/.cache/JetBrains/*"]

@@ -1,0 +1,25 @@
+[[rule]]
+id = "huggingface"
+name = "Hugging Face models and datasets"
+category = "ai"
+description = "Models and datasets downloaded by Python tools. Your access token is kept."
+risk = "medium"
+paths = ["~/.cache/huggingface/hub/*", "~/.cache/huggingface/datasets/*", "~/.cache/huggingface/xet/*", "~/.cache/huggingface/assets/*"]
+note = "Large files. They are downloaded again when a script needs them."
+
+[[rule]]
+id = "torch-whisper"
+name = "PyTorch and Whisper models"
+category = "ai"
+description = "Weights downloaded by PyTorch Hub and Whisper."
+risk = "medium"
+paths = ["~/.cache/torch/*", "~/.cache/whisper/*"]
+
+[[rule]]
+id = "local-llms"
+name = "Local language models"
+category = "ai"
+description = "Models of Ollama, LM Studio and GPT4All."
+risk = "high"
+paths = ["~/.ollama/models", "~/.cache/lm-studio/models/*", "~/.lmstudio/models/*", "~/.cache/gpt4all/*"]
+note = "These can be many gigabytes and slow to download again. Review each one."

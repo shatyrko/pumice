@@ -1,0 +1,9 @@
+[package]
+name = "pumice-helper"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Privileged helper for Pumice: a fixed list of actions, run through pkexec."
+
+[dependencies]
+libc = "0.2"

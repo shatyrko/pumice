@@ -1,0 +1,20 @@
+[package]
+name = "pumice-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Pumice engine: scanning, cleanup rules, safety checks and system readers."
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+rayon = "1.10"
+blake3 = "1"
+glob = "0.3"
+trash = "5"
+libc = "0.2"
+anyhow = "1"
+
+[dev-dependencies]
+tempfile = "3"
