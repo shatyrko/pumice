@@ -4,6 +4,7 @@ import { call, reveal } from '../api.js';
 import { bytes, shortPath } from '../format.js';
 import { confirm, errorText, store, toast } from '../store.js';
 import Icon from '../components/Icon.vue';
+import Explain from '../components/Explain.vue';
 import PageHead from '../components/PageHead.vue';
 
 defineProps({ active: Boolean });
@@ -113,6 +114,7 @@ async function uninstall() {
           <div class="grow"><h2>{{ sel.name }}</h2><p class="muted">{{ sel.source }} · {{ sel.package.split('/').pop() }}<span v-if="sel.version"> · {{ sel.version }}</span></p></div>
         </div>
         <p v-if="sel.comment" class="muted">{{ sel.comment }}</p>
+        <div><Explain topic="installed application" :facts="`Name: ${sel.name}\nSource: ${sel.source}\nPackage: ${sel.package.split('/').pop()}\nDescription: ${sel.comment}`" /></div>
         <p><strong>{{ bytes(sel.size) }}</strong> <span class="muted">installed</span></p>
         <h3 style="margin-top: 6px">Leftovers in your home folder</h3>
         <p v-if="loadingLeft" class="muted">Looking…</p>

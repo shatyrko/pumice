@@ -1,0 +1,49 @@
+# Maintainer: alecsh <19489163+shatyrko@users.noreply.github.com>
+# Builds Pumice from the git repository. Install with: makepkg -si
+pkgname=pumice-git
+_name=pumice
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Disk cleaner and system care app for Linux (Tauri, Rust, Vue)'
+arch=('x86_64' 'aarch64')
+url='https://github.com/shatyrko/pumice'
+license=('GPL-3.0-or-later')
+depends=('webkit2gtk-4.1' 'gtk3' 'polkit')
+makedepends=('cargo' 'nodejs' 'npm' 'git')
+optdepends=('pacman-contrib: clean the pacman package cache'
+            'smartmontools: disk health (SMART) in Maintenance')
+provides=('pumice')
+conflicts=('pumice')
+source=("$_name::git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_name"
+  printf '0.1.0.r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$_name"
+  export CARGO_TARGET_DIR=target
+  npm ci --no-audit --no-fund
+  npm run tauri build -- --no-bundle
+  cargo build --release --locked -p pumice-helper
+}
+
+check() {
+  cd "$_name"
+  cargo test --workspace --release --locked
+}
+
+package() {
+  cd "$_name"
+  install -Dm755 target/release/pumice "$pkgdir/usr/bin/pumice"
+  install -Dm755 target/release/pumice-helper "$pkgdir/usr/lib/pumice/pumice-helper"
+  install -Dm644 packaging/dev.pumice.helper.policy "$pkgdir/usr/share/polkit-1/actions/dev.pumice.helper.policy"
+  install -Dm644 packaging/pumice.desktop "$pkgdir/usr/share/applications/pumice.desktop"
+  for s in 16 24 32 48 64 128 256 512; do
+    install -Dm644 "packaging/icons/pumice-$s.png" "$pkgdir/usr/share/icons/hicolor/${s}x${s}/apps/pumice.png"
+  done
+  install -Dm644 packaging/pumice.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/pumice.svg"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

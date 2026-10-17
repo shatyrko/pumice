@@ -1,6 +1,7 @@
 //! Pumice engine. Everything here is plain Rust with no UI: the Tauri shell
 //! only calls these functions and forwards their results.
 
+pub mod ai;
 pub mod apps;
 pub mod clean;
 pub mod duplicates;

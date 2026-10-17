@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Pumice
+GenericName=Disk Cleaner
+Comment=Clean disk space and look after the system
+Exec=pumice
+Icon=pumice
+Terminal=false
+Categories=System;Utility;Monitor;
+Keywords=disk;cleaner;cache;storage;analyzer;duplicates;uninstall;
+StartupWMClass=pumice

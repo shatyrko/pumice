@@ -4,6 +4,7 @@ import { call } from '../api.js';
 import { bytes } from '../format.js';
 import { confirm, errorText, store, toast } from '../store.js';
 import Icon from '../components/Icon.vue';
+import Explain from '../components/Explain.vue';
 import PageHead from '../components/PageHead.vue';
 
 defineProps({ active: Boolean });
@@ -71,6 +72,7 @@ const dot = { ok: 'var(--ok)', warn: 'var(--warn)', info: 'var(--muted)', na: 'v
           <strong v-if="c.size != null">{{ bytes(c.size) }}</strong>
         </div>
         <p class="muted">{{ c.detail }}</p>
+        <div><Explain topic="system maintenance check" :facts="`Check: ${c.title}\nResult: ${c.detail}\nExamples: ${c.items.slice(0, 6).join(', ')}`" /></div>
         <div v-if="c.items.length" class="items selectable">
           <template v-if="c.id === 'orphans'">
             <label v-for="i in c.items" :key="i" class="row"><input type="checkbox" :checked="picked[c.id]?.has(i)" @change="picked[c.id]?.has(i) ? picked[c.id].delete(i) : picked[c.id].add(i)" /><span class="mono">{{ i }}</span></label>

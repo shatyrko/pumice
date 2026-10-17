@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { call } from '../api.js';
 import { errorText, toast } from '../store.js';
 import Icon from '../components/Icon.vue';
+import Explain from '../components/Explain.vue';
 import PageHead from '../components/PageHead.vue';
 
 defineProps({ active: Boolean });
@@ -60,6 +61,7 @@ async function flip(e) {
             <strong>{{ e.name }}</strong> <span class="badge">{{ e.scope }}</span> <span v-if="e.kind === 'timer'" class="badge">timer</span>
             <p class="muted ellipsis">{{ e.comment || e.command }}</p>
             <p v-if="e.comment && e.command" class="muted mono ellipsis selectable">{{ e.command }}</p>
+            <Explain topic="program or service that starts with the desktop session" :facts="`Name: ${e.name}\nKind: ${e.kind}\nDescription: ${e.comment}\nCommand: ${e.command}`" />
           </div>
         </div>
       </template>

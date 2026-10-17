@@ -3,7 +3,7 @@
 //! sends a free path to delete, only ids and paths the engine re-checks.
 
 use pumice_core::{
-    apps, clean, duplicates, history, maintenance, purge, rules, safety, scan, settings, startup, sysinfo, util,
+    ai, apps, clean, duplicates, history, maintenance, purge, rules, safety, scan, settings, startup, sysinfo, util,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -506,6 +506,38 @@ async fn maintenance_run(id: String, args: Vec<String>) -> Cmd<String> {
     }
 }
 
+// ---------- AI explanations ----------
+
+#[derive(Serialize)]
+struct AiStatus {
+    configured: bool,
+    provider: String,
+    model: String,
+    has_key: bool,
+}
+
+#[tauri::command]
+fn ai_status() -> AiStatus {
+    let s = settings::load();
+    let cfg = ai::config(&s);
+    AiStatus { configured: cfg.is_some() && (s.ai_provider != "anthropic" || ai::has_key()), provider: s.ai_provider.clone(), model: cfg.map(|c| c.model).unwrap_or_default(), has_key: ai::has_key() }
+}
+
+#[tauri::command]
+fn ai_set_key(key: String) -> Cmd<()> {
+    ai::set_key(&key).map_err(err)
+}
+
+#[tauri::command]
+fn ai_clear_key() -> Cmd<()> {
+    ai::clear_key().map_err(err)
+}
+
+#[tauri::command]
+async fn ai_explain(topic: String, facts: String) -> Cmd<String> {
+    tauri::async_runtime::spawn_blocking(move || ai::explain(&settings::load(), &topic, &facts)).await.map_err(err)?.map_err(err)
+}
+
 // ---------- history, settings, misc ----------
 
 #[tauri::command]
@@ -607,6 +639,10 @@ pub fn run() {
             helper_status,
             maintenance_checks,
             maintenance_run,
+            ai_status,
+            ai_set_key,
+            ai_clear_key,
+            ai_explain,
             history_list,
             history_clear,
             settings_get,

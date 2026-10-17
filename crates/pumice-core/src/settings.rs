@@ -23,11 +23,15 @@ pub struct Settings {
     pub ram_warn: f32,
     pub ram_crit: f32,
     pub temp_unit: String,
+    /// AI explanations: "off", "anthropic" or "openai" (any OpenAI-compatible server).
+    pub ai_provider: String,
+    pub ai_base_url: String,
+    pub ai_model: String,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        Settings { purge_roots: Vec::new(), use_trash: true, min_file_bytes: 1 << 20, protected: Vec::new(), purge_idle_days: 30, cpu_warn: 70.0, cpu_crit: 90.0, temp_warn: 80.0, temp_crit: 95.0, ram_warn: 75.0, ram_crit: 90.0, temp_unit: "c".into() }
+        Settings { purge_roots: Vec::new(), use_trash: true, min_file_bytes: 1 << 20, protected: Vec::new(), purge_idle_days: 30, cpu_warn: 70.0, cpu_crit: 90.0, temp_warn: 80.0, temp_crit: 95.0, ram_warn: 75.0, ram_crit: 90.0, temp_unit: "c".into(), ai_provider: "off".into(), ai_base_url: String::new(), ai_model: String::new() }
     }
 }
 

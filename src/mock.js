@@ -85,8 +85,13 @@ function snapshot(quiet) {
   };
 }
 
+let aiOn = true;
 const handlers = {
   set_dashboard_open: () => null,
+  ai_status: () => ({ configured: aiOn, provider: aiOn ? 'anthropic' : 'off', model: 'claude-haiku-5-5', has_key: aiOn }),
+  ai_set_key: () => { aiOn = true; return null; },
+  ai_clear_key: () => { aiOn = false; return null; },
+  ai_explain: ({ facts }) => `This is sample text from the mock. About "${facts.split('\n')[0]}": it is rebuilt automatically, so removing it is safe; the next start is a little slower.`,
   places: () => ({ home: '/home/demo', purge_roots: ['/home/demo/Projects'] }),
   settings_get: () => settings,
   settings_set: ({ value }) => Object.assign(settings, value),

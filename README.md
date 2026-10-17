@@ -1,3 +1,5 @@
+<p align="center"><img src="packaging/icons/pumice-256.png" alt="Pumice" width="128"></p>
+
 # Pumice
 
 A disk cleaner and system care app for Linux, with a graphical interface. Free software (GPL-3.0).
@@ -25,6 +27,11 @@ code base, not a fork; the dashboard follows the System Stats widget of the auth
 | **Maintenance** | Unused dependencies, package cache, journal, crash dumps, TRIM, failed services, `.pacnew` files, SMART health, container storage, DNS and desktop caches. |
 | **History** | Every operation and the space it freed. |
 
+**AI explanations** (off by default): an *Explain* button next to rules, apps, startup entries and
+checks tells you what an item is and whether it is safe to remove. Connect Anthropic or any
+OpenAI-compatible server (a local Ollama works) in Settings; the key is kept in the system keyring and
+only the name, description and a few example paths of that one item are sent.
+
 ## Safety
 
 - Scans only read.
@@ -40,6 +47,23 @@ code base, not a fork; the dashboard follows the System Stats widget of the auth
 - Actions that need root run through `pumice-helper` with `pkexec` and polkit: a separate program
   with a fixed list of actions, strict argument checks, and only application packages (packages
   that ship a menu entry) can be removed.
+
+## Install
+
+Arch (builds from this repository, installs the program, the helper and the polkit policy):
+
+```bash
+git clone https://github.com/shatyrko/pumice && cd pumice/packaging/arch && makepkg -si
+```
+
+Only for your user, without a package (program in `~/.local/bin`, launcher entry and icons in
+`~/.local/share`):
+
+```bash
+scripts/install-user.sh       # then scripts/install-helper.sh once, for the administrator actions
+```
+
+Tagged releases also get a `.deb`, an `.rpm` and an AppImage from CI (not tested on those systems yet).
 
 ## Build and run
 
@@ -79,8 +103,8 @@ passes the safety policy.
 
 ## Not yet
 
-Tray icon with the live readings, AI explanations of items, RPM/PKGBUILD packaging, Windows and
-macOS. Pull requests welcome.
+Windows and macOS, and a test of the `.deb`, `.rpm` and AppImage on their own systems. Pull requests
+welcome.
 
 ## Licence
 

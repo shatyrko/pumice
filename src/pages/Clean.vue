@@ -4,6 +4,7 @@ import { call, reveal } from '../api.js';
 import { bytes, shortPath } from '../format.js';
 import { confirm, errorText, store, toast } from '../store.js';
 import Icon from '../components/Icon.vue';
+import Explain from '../components/Explain.vue';
 import PageHead from '../components/PageHead.vue';
 
 defineProps({ active: Boolean });
@@ -141,6 +142,7 @@ async function apply() {
             <strong class="num">{{ bytes(r.total) }}</strong>
           </div>
           <p class="muted desc">{{ r.description }}<span v-if="r.note"> {{ r.note }}</span></p>
+          <div class="desc"><Explain topic="cleanup rule of a Linux disk cleaner" :facts="`Name: ${r.name}\nWhat the rule says: ${r.description}\nRisk level: ${r.risk}\nExamples: ${r.items.slice(0, 4).map((i) => shortPath(i.path, store.home)).join(', ')}`" /></div>
           <p v-if="r.blocked" class="blocked-note"><Icon name="warn" /> {{ r.blocked }}</p>
           <div v-if="expanded[r.id]" class="items">
             <label v-for="i in r.items.slice(0, 200)" :key="i.path" class="item row">

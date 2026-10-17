@@ -14,7 +14,7 @@ export const store = reactive({
   page: saved('pumice.page', 'dashboard'),
   dryRun: saved('pumice.dryRun', false),
   home: '',
-  settings: { purge_roots: [], use_trash: true, min_file_bytes: 1 << 20, protected: [], purge_idle_days: 30, cpu_warn: 70, cpu_crit: 90, temp_warn: 80, temp_crit: 95, ram_warn: 75, ram_crit: 90, temp_unit: 'c' },
+  settings: { purge_roots: [], use_trash: true, min_file_bytes: 1 << 20, protected: [], purge_idle_days: 30, cpu_warn: 70, cpu_crit: 90, temp_warn: 80, temp_crit: 95, ram_warn: 75, ram_crit: 90, temp_unit: 'c', ai_provider: 'off', ai_base_url: '', ai_model: '' },
   helper: { installed: true, path: '' },
   toasts: [],
   dialog: null,
