@@ -14,6 +14,8 @@ optdepends=('pacman-contrib: clean the pacman package cache'
             'smartmontools: disk health (SMART) in Maintenance')
 provides=('pumice')
 conflicts=('pumice')
+# makepkg's LTO flags break the C code that the keyring crate builds (libdbus): link errors.
+options=('!lto')
 source=("$_name::git+${url}.git")
 sha256sums=('SKIP')
 
@@ -24,7 +26,7 @@ pkgver() {
 
 build() {
   cd "$_name"
-  export CARGO_TARGET_DIR=target
+  export CARGO_TARGET_DIR="$PWD/target"
   npm ci --no-audit --no-fund
   npm run tauri build -- --no-bundle
   cargo build --release --locked -p pumice-helper
@@ -32,6 +34,7 @@ build() {
 
 check() {
   cd "$_name"
+  export CARGO_TARGET_DIR="$PWD/target"
   cargo test --workspace --release --locked
 }
 
